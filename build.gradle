@@ -1,13 +1,22 @@
-group 'simplesolution.dev'
-version '1.0.0'
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.checkerframework' version '0.6.55'
+}
 
-apply plugin: 'java'
-apply plugin: 'application'
+group = 'simplesolution.dev'
+version = '1.0.0'
 
 mainClassName = "simplesolution.dev.ArrayListExamples"
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
+
+checkerFramework {
+  checkers = [
+    'org.checkerframework.checker.index.IndexChecker'
+  ]
+}
 
 repositories {
     mavenCentral()
