@@ -236,4 +236,47 @@ public class ArrayListExamples {
         System.out.println(stringArray.length);
     }
 
+    /**
+     * This method is designed to FAIL with the current Index Checker.
+     * It demonstrates the classic problem of modifying a list while iterating,
+     * which invalidates the upper-bound check.
+     */
+    private static void demonstrateShrinkingFailure() {
+        System.out.println("\n--- Demonstrating Shrinking Failure Case ---");
+        List<String> list = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E"));
+
+        // This loop is expected to crash at runtime and trigger a checker warning.
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("Accessing index: " + i + ", Element: " + list.get(i));
+                // If we find "C", remove it. This changes the list's size.
+                if (list.get(i).equals("C")) {
+                    list.remove(i);
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Caught expected exception: " + e.getMessage());
+        }
+        System.out.println("Final list state: " + list);
+    }
+
+    // New method to add for the case study
+    /**
+     * This method will also FAIL with the current Index Checker, but it shouldn't.
+     * It demonstrates a "false positive" that a @GrowOnly annotation would fix.
+     */
+    private static void demonstrateGrowingBehavior() {
+        System.out.println("\n--- Demonstrating Growing Behavior (False Positive Case) ---");
+        List<String> list = new ArrayList<>(Arrays.asList("A", "B"));
+        int originalSize = list.size();
+
+        // The checker will warn about list.get(i), because it sees a mutation (list.add).
+        // However, this loop is perfectly safe at runtime.
+        for (int i = 0; i < originalSize; i++) {
+            System.out.println("Accessing index: " + i + ", Element: " + list.get(i));
+            // Add a new element. This increases the list's size.
+            list.add("New-" + i);
+        }
+        System.out.println("Final list state: " + list);
+    }
 }
