@@ -17,6 +17,8 @@ public class ArrayListExamples {
         loopArrayList();
         sortingArrayList();
         convertArrayListToArray();
+        demonstrateShrinkingFailure();
+        demonstrateGrowingBehavior();
     }
 
     private static void addOneElementToList() {
