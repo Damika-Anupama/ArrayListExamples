@@ -6,12 +6,13 @@ apply plugin: 'application'
 
 mainClassName = "simplesolution.dev.ArrayListExamples"
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-
+    // Add dependencies here if needed
 }
