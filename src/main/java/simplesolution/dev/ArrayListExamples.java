@@ -63,7 +63,6 @@ public class ArrayListExamples {
         // Find an element and use the index if found
         int index = findIndex(list, "alpha");
         if (index != -1) {
-            // index is guaranteed to be a valid index here (not -1)
             System.out.println("Found \"" + list.get(index) + "\" at index " + index);
         }
 
